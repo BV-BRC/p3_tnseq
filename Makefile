@@ -4,6 +4,7 @@ include $(TOP_DIR)/tools/Makefile.common
 THIS_APP = $(shell basename $(shell pwd))
 
 TRANSIT_SRC = https://github.com/aswarren/transit
+TRANSIT_DEPS = pip3 install pytest 'numpy~=1.16' 'scipy~=1.2' 'matplotlib~=3.0' 'pillow~=6.0' 'statsmodels~=0.9' 'rpy2'
 BUILD_VENV = $(shell pwd)/venv
 TARGET_VENV = $(TARGET)/venv/$(THIS_APP)
 
@@ -31,6 +32,7 @@ venv/bin/transit:
 	rm -rf transit venv
 	git clone $(TRANSIT_SRC) transit
 	python3 -m venv $(BUILD_VENV)
+	$(BUILD_VENV)/bin/activate; $(TRANSIT_DEPS)
 	cd transit; . $(BUILD_VENV)/bin/activate; python3 setup.py install
 	mkdir $(BUILD_VENV)/app-bin
 	ln -s ../bin/tpp ../bin/transit $(BUILD_VENV)/app-bin
@@ -45,6 +47,7 @@ deploy-venv:
 	rm -rf transit-deploy $(TARGET_VENV)
 	git clone $(TRANSIT_SRC) transit-deploy
 	python3 -m venv $(TARGET_VENV)
+	$(TARGET_VENV)/bin/activate; $(TRANSIT_DEPS)
 	cd transit-deploy; . $(TARGET_VENV)/bin/activate; python3 setup.py install
 	mkdir $(TARGET_VENV)/app-bin
 	ln -s ../bin/tpp ../bin/transit $(TARGET_VENV)/app-bin
