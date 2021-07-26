@@ -32,7 +32,7 @@ venv/bin/transit:
 	rm -rf transit venv
 	git clone $(TRANSIT_SRC) transit
 	python3 -m venv $(BUILD_VENV)
-	$(BUILD_VENV)/bin/activate; $(TRANSIT_DEPS)
+	. $(BUILD_VENV)/bin/activate; $(TRANSIT_DEPS)
 	cd transit; . $(BUILD_VENV)/bin/activate; python3 setup.py install
 	mkdir $(BUILD_VENV)/app-bin
 	ln -s ../bin/tpp ../bin/transit $(BUILD_VENV)/app-bin
@@ -46,8 +46,8 @@ deploy-service: deploy-libs deploy-scripts deploy-service-scripts deploy-specs d
 deploy-venv:
 	rm -rf transit-deploy $(TARGET_VENV)
 	git clone $(TRANSIT_SRC) transit-deploy
-	python3 -m venv $(TARGET_VENV)
-	$(TARGET_VENV)/bin/activate; $(TRANSIT_DEPS)
+	$(DEPLOY_RUNTIME)/bin/python3 -m venv $(TARGET_VENV)
+	. $(TARGET_VENV)/bin/activate; $(TRANSIT_DEPS)
 	cd transit-deploy; . $(TARGET_VENV)/bin/activate; python3 setup.py install
 	mkdir $(TARGET_VENV)/app-bin
 	ln -s ../bin/tpp ../bin/transit $(TARGET_VENV)/app-bin
