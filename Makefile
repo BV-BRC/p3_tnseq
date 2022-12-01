@@ -52,31 +52,6 @@ deploy-venv:
 	mkdir $(TARGET_VENV)/app-bin
 	ln -s ../bin/tpp ../bin/transit $(TARGET_VENV)/app-bin
 
-deploy-specs:
-	mkdir -p $(TARGET)/services/$(APP_SERVICE)
-	rsync -arv app_specs $(TARGET)/services/$(APP_SERVICE)/.
-
-deploy-service-scripts:
-	export KB_TOP=$(TARGET); \
-	export KB_RUNTIME=$(DEPLOY_RUNTIME); \
-	export KB_PERL_PATH=$(TARGET)/lib ; \
-	export KB_PYTHON_PATH=$(TARGET)/lib ; \
-	export PATH_ADDITIONS=$(TARGET_VENV)/app-bin; \
-	for src in $(SRC_SERVICE_PYTHON) ; do \
-	        basefile=`basename $$src`; \
-	        base=`basename $$src .py`; \
-	        echo install $$src $$base ; \
-	        cp $$src $(TARGET)/pybin ; \
-	        $(WRAP_PYTHON3_SCRIPT) "$(TARGET)/pybin/$$basefile" $(TARGET)/bin/$$base ; \
-	done; \
-	for src in $(SRC_SERVICE_PERL) ; do \
-	        basefile=`basename $$src`; \
-	        base=`basename $$src .pl`; \
-	        echo install $$src $$base ; \
-	        cp $$src $(TARGET)/plbin ; \
-	        $(WRAP_PERL_SCRIPT) "$(TARGET)/plbin/$$basefile" $(TARGET)/bin/$$base ; \
-	done
-
 $(BIN_DIR)/%: service-scripts/%.pl $(TOP_DIR)/user-env.sh
 	export PATH_ADDITIONS=$(BUILD_VENV)/app-bin; \
 	$(WRAP_PERL_SCRIPT) '$$KB_TOP/modules/$(CURRENT_DIR)/$<' $@
