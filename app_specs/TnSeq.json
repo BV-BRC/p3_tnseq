@@ -3,7 +3,7 @@
     "script": "App-TnSeq",
     "label": "Analyze TnSeq data",
     "description": "Use TRANSIT to analyze TnSeq data",
-  "default_memory": "100G",
+    "default_memory": "100G",
     "parameters": [
         {
             "id": "experimental_conditions",
@@ -26,11 +26,11 @@
             "type": "group",
             "allow_multiple": true,
             "required": 0,
-            "default" : null
+            "default": null
         },
         {
             "id": "reference_genome_id",
-            "required": 0,
+            "required": 1,
             "default": null,
             "label": "Reference genome ID",
             "desc": "Reference genome ID",
@@ -43,7 +43,15 @@
             "default": "gumbel",
             "desc": "Recipe used for TnSeq analysis",
             "type": "enum",
-            "enum": ["griffin", "tn5gaps", "rankproduct", "hmm", "binomial", "resampling"]
+            "enum": [
+                "gumbel",
+                "griffin",
+                "tn5gaps",
+                "rankproduct",
+                "hmm",
+                "binomial",
+                "resampling"
+            ]
         },
         {
             "id": "protocol",
@@ -52,7 +60,11 @@
             "default": "sassetti",
             "desc": "Protocol used for TnSeq analysis",
             "type": "enum",
-            "enum": ["sassetti", "tn5", "mme1"]
+            "enum": [
+                "sassetti",
+                "tn5",
+                "mme1"
+            ]
         },
         {
             "id": "primer",
@@ -71,12 +83,12 @@
             "type": "folder"
         },
         {
-            "id":"output_file",
-            "label":"File Basename",
+            "id": "output_file",
+            "label": "File Basename",
             "required": 1,
-            "default":null,
-            "desc":"Basename for the generated output files. Defaults to the basename of the input data.",
-            "type":"wsid"
+            "default": null,
+            "desc": "Basename for the generated output files. Defaults to the basename of the input data.",
+            "type": "wsid"
         }
     ]
 }
