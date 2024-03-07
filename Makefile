@@ -4,7 +4,7 @@ include $(TOP_DIR)/tools/Makefile.common
 THIS_APP = $(shell basename $(shell pwd))
 
 TRANSIT_SRC = https://github.com/aswarren/transit
-TRANSIT_DEPS = pip3 install pytest 'numpy~=1.16' 'scipy~=1.2' 'matplotlib~=3.0' 'pillow~=6.0' 'statsmodels~=0.9' 'rpy2==3.5.12'
+TRANSIT_DEPS = pip3 install pytest 'numpy~=1.16' 'scipy==1.11.4' 'matplotlib~=3.0' 'pillow~=6.0' 'statsmodels~=0.9' 'rpy2==3.5.12'
 BUILD_VENV = $(shell pwd)/venv
 TARGET_VENV = $(TARGET)/venv/$(THIS_APP)
 
