@@ -22,6 +22,7 @@ This module provides the following application specfication(s):
 
 ## See also
 
+* [Tn-Seq Analysis Service Quick Reference](https://www.bv-brc.org/docs/quick_references/services/tn_seq_analysis_service.html)
 * [Tn-Seq Analysis Service](https://www.bv-brc.org/docs/https://bv-brc.org/app/Tnseq.html)
 * [Tn-Seq Analysis Service Tutorial](https://www.bv-brc.org/docs//tutorial/tn-seq/tn-seq.html)
 
